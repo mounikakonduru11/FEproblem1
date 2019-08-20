@@ -1,0 +1,42 @@
+<h1 class="header-text">Finding Falcone! </h1>
+<p class="header-text">Select planets you want to search in :</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      Destination 1 :
+      <select [(ngModel)]="destination1"   (change)="onPlanetChange(0,$event)">
+        <option value="" selected></option>
+        <ng-container *ngFor="let planet of planets;let i=index">
+          <option value="{{i}}" [hidden]="showElement(0,i)">{{planet.name}}</option>
+        </ng-container>
+      </select>
+    </div>
+    <div class="col-md-3">
+      Destination 2 :
+      <select [(ngModel)]="destination2" (change)="onPlanetChange(1,$event)">
+        <option value="" selected></option>
+        <ng-container *ngFor="let planet of planets;let i=index">
+          <option value="{{i}}" [hidden]="showElement(1,i)">{{planet.name}}</option>
+        </ng-container>
+      </select>
+    </div>
+    <div class="col-md-3">
+      Destination 3 :
+      <select [(ngModel)]="destination3" (change)="onPlanetChange(2,$event)">
+        <option value="" selected></option>
+        <ng-container *ngFor="let planet of planets;let i=index">
+          <option value="{{i}}" [hidden]="showElement(2,i)">{{planet.name}}</option>
+        </ng-container>
+      </select>
+    </div>
+    <div class="col-md-3">
+      Destination 4 :
+      <select [(ngModel)]="destination4" (change)="onPlanetChange(3,$event)">
+        <option value="" selected></option>
+        <ng-container *ngFor="let planet of planets;let i=index">
+          <option value="{{i}}" [hidden]="showElement(3,i)">{{planet.name}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </div>
+</div>
