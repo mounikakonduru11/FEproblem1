@@ -2,41 +2,24 @@
 <p class="header-text">Select planets you want to search in :</p>
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      Destination 1 :
-      <select [(ngModel)]="destination1"   (change)="onPlanetChange(0,$event)">
-        <option value="" selected></option>
-        <ng-container *ngFor="let planet of planets;let i=index">
-          <option value="{{i}}" [hidden]="showElement(0,i)">{{planet.name}}</option>
+    <div class="col-md-3" *ngFor="let item of selectedPlanetsIndex;let i=index;">
+      Destination {{i+1}} :
+      <select [(ngModel)]="selectedPlanetsIndex[i]" (change)="planetChange()">
+        <option value="-1" selected></option>
+        <ng-container *ngFor="let planet of planets;let p=index">
+          <option value="{{p}}" [hidden]="showElement(p)">{{planet.name}}</option>
         </ng-container>
       </select>
-    </div>
-    <div class="col-md-3">
-      Destination 2 :
-      <select [(ngModel)]="destination2" (change)="onPlanetChange(1,$event)">
-        <option value="" selected></option>
-        <ng-container *ngFor="let planet of planets;let i=index">
-          <option value="{{i}}" [hidden]="showElement(1,i)">{{planet.name}}</option>
-        </ng-container>
-      </select>
-    </div>
-    <div class="col-md-3">
-      Destination 3 :
-      <select [(ngModel)]="destination3" (change)="onPlanetChange(2,$event)">
-        <option value="" selected></option>
-        <ng-container *ngFor="let planet of planets;let i=index">
-          <option value="{{i}}" [hidden]="showElement(2,i)">{{planet.name}}</option>
-        </ng-container>
-      </select>
-    </div>
-    <div class="col-md-3">
-      Destination 4 :
-      <select [(ngModel)]="destination4" (change)="onPlanetChange(3,$event)">
-        <option value="" selected></option>
-        <ng-container *ngFor="let planet of planets;let i=index">
-          <option value="{{i}}" [hidden]="showElement(3,i)">{{planet.name}}</option>
-        </ng-container>
-      </select>
+      <div>
+        <div *ngIf="selectedPlanetsIndex[i]>=0">
+        <div *ngFor="let vehicle of vehicles;let v=index">
+          <input type="radio" name="destvehicle{{i}}" value="" (change)="vehicleChange(i,v)" [disabled]="( vehicle.total_no == 0 && selectedVehiclesIndex[i] != v ) || ( selectedPlanetsIndex[i] >=0  && planets[selectedPlanetsIndex[i]].distance > vehicle.max_distance) ">
+          <label >{{vehicle.name}} ({{vehicle.total_no}})</label>
+        </div>
+      </div>
+      </div>
     </div>
   </div>
 </div>
+<span class="header-text">Time Taken : {{time}}</span>
+<button class="header-text" (click)="findFalcone()" [disabled]="enableButton()">Find Falcone</button>
